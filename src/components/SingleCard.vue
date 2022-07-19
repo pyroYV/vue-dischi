@@ -1,13 +1,29 @@
 <template>
-  
+  <div class="single-card mx-4 p-2 text-center">
+    <img :src="card.poster" alt="">
+    <p>
+        {{card.title}}
+    </p>
+    <p> {{card.author}} </p>
+  </div>
 </template>
 
-<script>
+<script> 
 export default {
+    props:{
+        'card': 'object',
+        }
 
 }
 </script>
 
-<style>
-
+<style lang="scss">
+    
+.single-card{
+    color:white;
+    background-color: #2e3a46;
+    img{
+        height: 200px;
+    }
+}
 </style>

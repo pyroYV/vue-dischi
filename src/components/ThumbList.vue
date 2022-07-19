@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <SingleCard/>
+  <div class="row g-4 justify-content-center">
+    <SingleCard class="col-2"
+     v-for="(element, index) in albumsArray" :key="index"
+        :card ="element"
+     />
   </div>
 </template>
 
@@ -8,10 +11,12 @@
 import axios from 'axios'
 import SingleCard from './SingleCard.vue'
 
+
 export default {
     data() {
         return {
-            
+            albumsArray:[],
+ 
         }
     },
     components:{
@@ -22,12 +27,16 @@ export default {
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
             .then((result) => {
                 this.card = result.data.result;
-                console.log(result.data.result)
+                this.albumsArray = result.data.response
+                console.log(this.albumsArray)
             })
             .catch((error) => {
                 console.warn(error);
             })
         }
+    },
+    mounted() {
+        this.GetCards()
     },
 
 }
