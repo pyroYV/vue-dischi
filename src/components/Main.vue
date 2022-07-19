@@ -1,6 +1,10 @@
 <template>
-  <ThumbList/>
-
+<main>
+    <div class="container-lg"> 
+        
+     <ThumbList/>
+  </div>
+</main>
 </template>
 
 <script>
@@ -12,6 +16,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+main{
+    background-color: #1e2d3b;
+    height: 80vh;
+}
 
 </style>
