@@ -1,5 +1,5 @@
 <template>
-  <div class="single-card mx-4 p-2 text-center">
+  <div class="single-card mx-3 p-2 text-center">
     <img :src="card.poster" alt="">
     <p>
         {{card.title}}

@@ -1,26 +1,32 @@
 <template>
-  <div class="row g-4 justify-content-center">
-    <SingleCard class="col-2"
-     v-for="(element, index) in albumsArray" :key="index"
-        :card ="element"
-     />
-  </div>
+    <div>
+        <Loader v-if="(!isLoaded)"/>
+    <div class="row g-4 justify-content-center" v-if="(isLoaded)">
+        <SingleCard class="col-2" 
+        v-for="(element, index) in albumsArray" :key="index"
+            :card ="element"
+        />
+        
+    </div>
+   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import SingleCard from './SingleCard.vue'
-
+import Loader from './Loader.vue'
 
 export default {
     data() {
         return {
             albumsArray:[],
+            isLoaded:false
  
         }
     },
     components:{
         SingleCard,
+        Loader,
     },
     methods: {
         GetCards(){
@@ -28,15 +34,21 @@ export default {
             .then((result) => {
                 this.card = result.data.result;
                 this.albumsArray = result.data.response
-                console.log(this.albumsArray)
             })
             .catch((error) => {
                 console.warn(error);
             })
+        },
+        Loading(){
+            setTimeout(() => this.isLoaded = true ,3000)
+          
         }
     },
     mounted() {
+        this.Loading()
         this.GetCards()
+       
+        
     },
 
 }

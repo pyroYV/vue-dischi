@@ -15,6 +15,7 @@ export default {
 
 header{
     background-color: #2e3a46;
+    height: 90px;
     img{
         height: 50px;
     }
