@@ -4,9 +4,10 @@
         <div class="row g-4 justify-content-center position-relative" v-if="(isLoaded)">
             <GenreSelect
             @genreSelected='genreSelected'
+            :genres = 'genres'
             />
             <SingleCard class="col-2" 
-            v-for="(element, index) in albumsArray" :key="index"
+            v-for="(element, index) in filteredAlbums" :key="index"
                 :card ="element"
             />
         </div>
@@ -25,7 +26,9 @@ export default {
             albumsArray:[],
             isLoaded:false,
             genres:[],
-            genreSelected:''
+            genreSelected:'',
+            filteredAlbums:[],
+
 
         }
     },
@@ -43,6 +46,7 @@ export default {
                 this.albumsArray = result.data.response
 
                 this.GenreArray()
+                this.FilterAlbums(this.genreSelected)
 
                 this.Loading()
             })
@@ -59,13 +63,21 @@ export default {
             if(!this.genres.includes(this.albumsArray[i].genre)){
                 this.genres.push(this.albumsArray[i].genre)
             }
+            }
             console.log(this.genres)
-        }
+        },
+        FilterAlbums(element){ 
+            this.filteredAlbums = [...this.albumsArray].filter((album) => album.genre.includes(element))
+        },
+        GenreSelectedCallback(input){
+            genreSelected = input
+            this.FilterAlbums(this.genreSelected)
         }
 
     },
     mounted() {
         this.GetCards() 
+    
         
     },
 

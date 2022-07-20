@@ -1,12 +1,12 @@
 <template>
   <div >
    <select class="form-select" name="Genres" id="genreSelect"
-    @change="$emit('genreSelected',genreInput)" v-model="genreInput"  >
+    @change="$emit('genreSelected', genreInput)" v-model="genreInput"  >
         <option value="" selected>All</option>
-        <option value="rock">Rock</option>
-        <option value="pop">Pop</option>
-        <option value="jazz">Jazz</option>
-        <option value="metal">Metal</option>
+        <option v-for="(genre, index) in genres" :value="genre" :key="index" >
+            {{genre}}
+        </option>
+
     </select>
   </div>
 </template>
@@ -18,6 +18,9 @@ export default {
             genreInput:''
         }
     },
+    props:{
+        genres : Array
+    }
 }
 </script>
 
