@@ -1,6 +1,6 @@
 <template>
   <div id="">
-    <input type="text" v-model='artistSearch' @cahnge="$emit('artistSearch', artistSearch)" placeholder="Vuoi cercare per un artista?"> 
+    <input type="text" v-model='artistSearch' @change="$emit('artistSearch', artistSearch)" placeholder="Vuoi cercare per un artista?"> 
   </div>
 </template>
 

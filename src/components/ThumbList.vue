@@ -79,13 +79,13 @@ export default {
             this.genreSelected = input
             this.FilterAlbumsGenre(this.genreSelected)
         },
-        ArtistSelectCallback(input){
+        ArtistSelectCallback(input) {
             this.genreSelected = input
-
+            this.filteredAlbums = this.filteredAlbums.filter((album) => album.author.toLowerCase().includes(input.toLowerCase()))
+            console.log(input)
+            console.log({f:this.filteredAlbums})
         },
-        FilterAlbumAuthor(element){
-            this.filteredAlbums = [...this.albumsArray].filter((album) => album.author.toLowerCase().Iincludes(element.toLowerCase()))
-        },
+   
         ArtistsArray(){
             for(let i =0 ; i< this.albumsArray.length; i++){
             if(!this.artists.includes(this.albumsArray[i].author)){
