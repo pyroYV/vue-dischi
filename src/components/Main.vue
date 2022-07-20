@@ -20,7 +20,7 @@ export default {
 @import '../assets/styles/variables.scss';
 main{
     background-color: $BrandBlue;
-    height: 90vh;
+    height: calc(100vh);
 }
 
 </style>
