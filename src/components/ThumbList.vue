@@ -1,7 +1,8 @@
 <template>
     <div>
         <Loader class="loader" v-if="(!isLoaded)"/>
-        <div class="row g-4 justify-content-center" v-if="(isLoaded)">
+        <div class="row g-4 justify-content-center position-relative" v-if="(isLoaded)">
+            <GenreSelect/>
             <SingleCard class="col-2" 
             v-for="(element, index) in albumsArray" :key="index"
                 :card ="element"
@@ -14,6 +15,7 @@
 import axios from 'axios'
 import SingleCard from './SingleCard.vue'
 import Loader from './Loader.vue'
+import GenreSelect from './GenreSelect.vue'
 
 export default {
     data() {
@@ -26,6 +28,7 @@ export default {
     components:{
         SingleCard,
         Loader,
+        GenreSelect
     },
     methods: {
         GetCards(){
@@ -40,14 +43,11 @@ export default {
             })
         },
         Loading(){
-            setTimeout(() => this.isLoaded = true ,3000)
-          
+            setTimeout(() => this.isLoaded = true ,/* 3000 */)
         }
     },
     mounted() {
-        this.GetCards()
-       
-        
+        this.GetCards() 
     },
 
 }

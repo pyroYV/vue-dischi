@@ -5,6 +5,7 @@
         {{card.title}}
     </p>
     <p> {{card.author}} </p>
+    <p>{{card.genre}}</p>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ export default {
     background-color: #2e3a46;
     img{
         height: 200px;
+        width: 200px;
     }
 }
 </style>
