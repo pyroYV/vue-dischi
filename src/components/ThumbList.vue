@@ -24,7 +24,7 @@ export default {
         return {
             albumsArray:[],
             isLoaded:false,
-            Genres:[],
+            genres:[],
             genreSelected:''
 
         }
@@ -38,9 +38,12 @@ export default {
         GetCards(){
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
             .then((result) => {
+
                 this.card = result.data.result;
                 this.albumsArray = result.data.response
-                this.GenreArray(this.albumsArray)
+
+                this.GenreArray()
+
                 this.Loading()
             })
             .catch((error) => {
@@ -51,13 +54,13 @@ export default {
             setTimeout(() => this.isLoaded = true ,/* 3000 */)
         },
         GenreArray(){
-            console.log({albumsArray})
-            this.albumsArray.forEach(() => {
-                if(!this.Genres.includes(this.albumsArray.genre)){
-                    this.albumsArray.push(this.albumsArray.genre)
-                }
-                console.log({Genres})
-            });
+            
+            for(let i =0 ; i< this.albumsArray.length; i++){
+            if(!this.genres.includes(this.albumsArray[i].genre)){
+                this.genres.push(this.albumsArray[i].genre)
+            }
+            console.log(this.genres)
+        }
         }
 
     },
