@@ -1,6 +1,7 @@
 <template>
   <div >
-   <select class="form-select" name="Genres" id="genreSelect">
+   <select class="form-select" name="Genres" id="genreSelect"
+    @change="$emit('genreSelected',genreInput)" v-model="genreInput"  >
         <option value="" selected>All</option>
         <option value="rock">Rock</option>
         <option value="pop">Pop</option>
@@ -12,7 +13,11 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            genreInput:''
+        }
+    },
 }
 </script>
 

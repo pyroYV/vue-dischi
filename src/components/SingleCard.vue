@@ -11,9 +11,9 @@
 
 <script> 
 export default {
-    props:{
-        'card': 'object',
-        }
+    props:[
+        'card'
+        ]
 
 }
 </script>

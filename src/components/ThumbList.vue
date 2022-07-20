@@ -2,7 +2,9 @@
     <div>
         <Loader class="loader" v-if="(!isLoaded)"/>
         <div class="row g-4 justify-content-center position-relative" v-if="(isLoaded)">
-            <GenreSelect/>
+            <GenreSelect
+            @genreSelected='genreSelected'
+            />
             <SingleCard class="col-2" 
             v-for="(element, index) in albumsArray" :key="index"
                 :card ="element"
@@ -21,8 +23,10 @@ export default {
     data() {
         return {
             albumsArray:[],
-            isLoaded:false
- 
+            isLoaded:false,
+            Genres:[],
+            genreSelected:''
+
         }
     },
     components:{
@@ -36,6 +40,7 @@ export default {
             .then((result) => {
                 this.card = result.data.result;
                 this.albumsArray = result.data.response
+                this.GenreArray(this.albumsArray)
                 this.Loading()
             })
             .catch((error) => {
@@ -44,10 +49,21 @@ export default {
         },
         Loading(){
             setTimeout(() => this.isLoaded = true ,/* 3000 */)
+        },
+        GenreArray(){
+            console.log({albumsArray})
+            this.albumsArray.forEach(() => {
+                if(!this.Genres.includes(this.albumsArray.genre)){
+                    this.albumsArray.push(this.albumsArray.genre)
+                }
+                console.log({Genres})
+            });
         }
+
     },
     mounted() {
         this.GetCards() 
+        
     },
 
 }
