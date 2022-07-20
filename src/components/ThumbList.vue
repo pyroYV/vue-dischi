@@ -1,13 +1,12 @@
 <template>
     <div>
-        <Loader v-if="(!isLoaded)"/>
-    <div class="row g-4 justify-content-center" v-if="(isLoaded)">
-        <SingleCard class="col-2" 
-        v-for="(element, index) in albumsArray" :key="index"
-            :card ="element"
-        />
-        
-    </div>
+        <Loader class="loader" v-if="(!isLoaded)"/>
+        <div class="row g-4 justify-content-center" v-if="(isLoaded)">
+            <SingleCard class="col-2" 
+            v-for="(element, index) in albumsArray" :key="index"
+                :card ="element"
+            />
+        </div>
    </div>
 </template>
 
@@ -34,6 +33,7 @@ export default {
             .then((result) => {
                 this.card = result.data.result;
                 this.albumsArray = result.data.response
+                this.Loading()
             })
             .catch((error) => {
                 console.warn(error);
@@ -45,7 +45,6 @@ export default {
         }
     },
     mounted() {
-        this.Loading()
         this.GetCards()
        
         
@@ -54,6 +53,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+loader{
+    img{
+        margin: auto;
+    }
+}
 </style>

@@ -17,8 +17,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/styles/variables.scss';
 main{
-    background-color: #1e2d3b;
+    background-color: $BrandBlue;
     height: 90vh;
 }
 
