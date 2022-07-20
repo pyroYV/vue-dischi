@@ -4,12 +4,13 @@
         <div class="row g-4 justify-content-center position-relative" v-if="(isLoaded)">
             <GenreSelect
             @genreSelected='GenreSelectedCallback'
-            :genres = 'genres'
-            />
+            :genres = 'genres'/>
+            <ArtistSelect
+            @artistSearch = 'ArtistSelectCallback'
+            @keyup.enter="FilterAlbumAuthor(artistSearch)"/>
             <SingleCard class="col-2" 
             v-for="(element, index) in filteredAlbums" :key="index"
-                :card ="element"
-            />
+                :card ="element"/>
         </div>
    </div>
 </template>
@@ -19,6 +20,7 @@ import axios from 'axios'
 import SingleCard from './SingleCard.vue'
 import Loader from './Loader.vue'
 import GenreSelect from './GenreSelect.vue'
+import ArtistSelect from "./ArtistSelect.vue";
 
 export default {
     data() {
@@ -28,6 +30,9 @@ export default {
             genres:[],
             genreSelected:'',
             filteredAlbums:[],
+            artistSearch:'',
+            artists: [],
+
 
 
         }
@@ -35,7 +40,9 @@ export default {
     components:{
         SingleCard,
         Loader,
-        GenreSelect
+        GenreSelect,
+        ArtistSelect,
+
     },
     methods: {
         GetCards(){
@@ -46,7 +53,7 @@ export default {
                 this.albumsArray = result.data.response
 
                 this.GenreArray()
-                this.FilterAlbums(this.genreSelected)
+                this.FilterAlbumsGenre(this.genreSelected)
 
                 this.Loading()
             })
@@ -65,12 +72,27 @@ export default {
             }
             console.log(this.genres)
         },
-        FilterAlbums(element){ 
+        FilterAlbumsGenre(element){ 
             this.filteredAlbums = [...this.albumsArray].filter((album) => album.genre.includes(element))
         },
         GenreSelectedCallback(input){
             this.genreSelected = input
-            this.FilterAlbums(this.genreSelected)
+            this.FilterAlbumsGenre(this.genreSelected)
+        },
+        ArtistSelectCallback(input){
+            this.genreSelected = input
+
+        },
+        FilterAlbumAuthor(element){
+            this.filteredAlbums = [...this.albumsArray].filter((album) => album.author.toLowerCase().Iincludes(element.toLowerCase()))
+        },
+        ArtistsArray(){
+            for(let i =0 ; i< this.albumsArray.length; i++){
+            if(!this.artists.includes(this.albumsArray[i].author)){
+                this.artists.push(this.albumsArray[i].author)
+            }
+            }
+            console.log(this.artists)
         }
 
     },
