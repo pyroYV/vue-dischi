@@ -3,7 +3,7 @@
         <Loader class="loader" v-if="(!isLoaded)"/>
         <div class="row g-4 justify-content-center position-relative" v-if="(isLoaded)">
             <GenreSelect
-            @genreSelected='genreSelected'
+            @genreSelected='GenreSelectedCallback'
             :genres = 'genres'
             />
             <SingleCard class="col-2" 
@@ -58,7 +58,6 @@ export default {
             setTimeout(() => this.isLoaded = true ,/* 3000 */)
         },
         GenreArray(){
-            
             for(let i =0 ; i< this.albumsArray.length; i++){
             if(!this.genres.includes(this.albumsArray[i].genre)){
                 this.genres.push(this.albumsArray[i].genre)
@@ -70,13 +69,13 @@ export default {
             this.filteredAlbums = [...this.albumsArray].filter((album) => album.genre.includes(element))
         },
         GenreSelectedCallback(input){
-            genreSelected = input
+            this.genreSelected = input
             this.FilterAlbums(this.genreSelected)
         }
 
     },
     mounted() {
-        this.GetCards() 
+        this.GetCards()  
     
         
     },
